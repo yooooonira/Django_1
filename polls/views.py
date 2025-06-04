@@ -8,6 +8,8 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from .models import Question, Choice
 
+from django.urls import reverse_lazy
+
 
 # def index(request):
 	
@@ -67,3 +69,16 @@ def vote(request, question_id):
         selected_choice.votes = F("votes") + 1
         selected_choice.save()
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+
+
+class QuestionCreateView(generic.CreateView):
+    model=Question
+    fields=["question_text","pub_date"]
+    template_name="polls/question_form.html"
+    success_url=reverse_lazy("polls:index") #reverse_lazy 메서드
+
+class QuestionUpdateView(generic.UpdateView):
+    pass
+
+class QuestionDeleteView(generic.DeleteView):
+    pass

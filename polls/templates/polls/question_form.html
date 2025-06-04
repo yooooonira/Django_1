@@ -1,0 +1,18 @@
+{% extends "polls/base.html" %}
+
+{% block title %}
+ 질문 작성/수정 
+{% endblock %}
+
+{% block content %}
+
+
+<form method="post">
+  {%csrf_token%}
+  
+  {{form.as_p}}
+
+
+  <button type="submit">저장</button>  <!-- submit -->
+</form>
+{% endblock %}
